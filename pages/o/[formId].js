@@ -79,9 +79,7 @@ export default function OrderFormPage({ bakeryInfo }) {
 
   return (
     <Box as="form" onSubmit={onSubmit} margin={8}>
-      <Text fontSize="2xl" casing="uppercase">
-        {bakeryInfo.companyName ? bakeryInfo.companyName : "Order Form"}
-      </Text>
+      <Text fontSize="2xl" casing="uppercase"></Text>
       <FormControl>
         <FormLabel>Name</FormLabel>
         <Input mb={4} type="text" ref={inputName} placeholder="Nate Stanz" />

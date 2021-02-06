@@ -41,7 +41,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }
 
@@ -80,7 +80,7 @@ export default function OrderFormPage({ bakeryInfo }) {
   return (
     <Box as="form" onSubmit={onSubmit} margin={8}>
       <Text fontSize="2xl" casing="uppercase">
-        {bakeryInfo.companyName}
+        {bakeryInfo.companyName || "Order Form"}
       </Text>
       <FormControl>
         <FormLabel>Name</FormLabel>

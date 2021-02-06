@@ -5,7 +5,6 @@ import DatePicker from "react-datepicker";
 import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
   FormHelperText,
   Input,
   Button,
@@ -17,15 +16,16 @@ import {
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import { submitOrder } from "@/lib/db";
-import { getAllBakers, getBakeryName } from "@/lib/db-admin";
+import { getAllBakers, getUserInfo } from "@/lib/db-admin";
 
 export async function getStaticProps(context) {
   const formId = context.params.formId;
 
-  const { bakerList } = await getBakeryName(formId);
+  const bakerInfo = await getUserInfo(formId);
+
   return {
     props: {
-      bakeryInfo: bakerList,
+      bakeryInfo: bakerInfo,
     },
     revalidate: 1,
   };
@@ -81,7 +81,7 @@ export default function OrderFormPage({ bakeryInfo }) {
   return (
     <Box as="form" onSubmit={onSubmit} margin={8}>
       <Text fontSize="2xl" casing="uppercase">
-        {bakeryInfo[0].companyName}
+        {bakeryInfo.companyName}
       </Text>
       <FormControl>
         <FormLabel>Name</FormLabel>

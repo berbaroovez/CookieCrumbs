@@ -33,7 +33,7 @@ export async function getStaticProps(context) {
 
 export async function getStaticPaths() {
   const { sites } = await getAllBakers();
-
+  console.log(sites);
   const paths = sites.map((site) => ({
     params: {
       formId: site.id.toString(),
@@ -42,7 +42,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 }
 

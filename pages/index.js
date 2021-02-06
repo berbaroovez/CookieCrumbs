@@ -5,7 +5,7 @@ import { useAuth } from "../lib/auth";
 import Signup from "../components/Signup";
 import SignIn from "../components/SignIn";
 
-import { Button } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 
 export default function Home() {
   const auth = useAuth();
@@ -24,15 +24,24 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <Signup />
-
-      <SignIn />
-      <h1>{auth.user ? auth.user.email : "none"}</h1>
-      <h1>{auth.user ? auth.user.token : "none"}</h1>
-      <Button onClick={auth.printuser}>print</Button>
-      <Button onClick={test}>test</Button>
-      <Button onClick={auth.signout}>Sign out</Button>
+      <Box
+        textAlign="center"
+        background="teal.100"
+        mb={8}
+        p={8}
+        borderRadius="20px"
+      >
+        <Heading>Cookie Crumbs</Heading>
+        <Text fontSize="lg">
+          Your one stop shop for tracking and managing your cookie orders
+        </Text>
+      </Box>
+      <Box>
+        <Text textAlign="center" fontSize="xl" fontWeight="bold" mb={4}>
+          Sign Up Today!
+        </Text>
+        <Signup />
+      </Box>
     </div>
   );
 }

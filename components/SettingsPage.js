@@ -41,7 +41,8 @@ export default function SettingsPage() {
         <Heading>{data.companyName}</Heading>
         <Text>{data.email}</Text>
         <Text>
-          Order Form URL: <Code>{`localhost:3000/o/${data.uid}`}</Code>
+          Order Form URL:
+          <Code>{`https://cookiecrumbs.vercel.app/o/${data.uid}`}</Code>
         </Text>
       </Box>
     );

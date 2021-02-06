@@ -31,10 +31,18 @@ export default function DashboardSkeleton({ children }) {
             Home
           </Text>
         </NavLink>
-        <NavLink pageRoute="orderform">
-          <CopyIcon mr={2} />
-          <Text fontSize="lg">Order Form</Text>
-        </NavLink>
+
+        {user ? (
+          <NavLink pageRoute="o/[formId]" as={`/o/${user.uid}`}>
+            <CopyIcon mr={2} />
+            <Text fontSize="lg">Order Form</Text>
+          </NavLink>
+        ) : (
+          <NavLink>
+            <CopyIcon mr={2} />
+            <Text fontSize="lg">Order Form</Text>
+          </NavLink>
+        )}
         <NavLink pageRoute="search">
           <Search2Icon mr={2} />
           <Text fontSize="lg">Search</Text>

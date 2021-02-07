@@ -31,7 +31,7 @@ export default function Signup() {
     <Box as="form" onSubmit={onSubmit}>
       <FormControl id="email">
         <FormLabel>Email address</FormLabel>
-        <Input type="email" ref={inputEmail} />
+        <Input type="email" ref={inputEmail} placeholder="Nate Stanz" />
         <FormHelperText>We'll never share your email.</FormHelperText>
         <FormLabel>Password</FormLabel>
         <Input type="password" ref={inputPassword} />
@@ -40,7 +40,7 @@ export default function Signup() {
         <Input
           type="text"
           ref={inputCompanyName}
-          placeholder="148 Cookie Street"
+          placeholder="Custom Cookies by Nate"
         />
         <FormHelperText>Let us know your bakerys name!</FormHelperText>
         <Button

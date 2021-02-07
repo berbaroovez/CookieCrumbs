@@ -5,53 +5,57 @@ import { useAuth } from "../lib/auth";
 export default function IndexNavBar() {
   const { user } = useAuth();
   return (
-    <Box
-      w="100%"
-      background="teal"
-      color="white"
-      p={2}
-      boxShadow="xl"
-      pos="fixed"
-    >
-      <Flex justifyContent="space-between" px={4}>
-        <Flex alignItems="center">
-          <NextLink href="/" passHref>
-            <Link>
-              <Icon as={FaStroopwafel} w={[6, 8]} h={[6, 8]} />
-            </Link>
-          </NextLink>
+    <Flex justifyContent="center">
+      <Box
+        top="10px"
+        w="90%"
+        background="teal"
+        color="white"
+        p={2}
+        boxShadow="xl"
+        pos="fixed"
+        borderRadius="15px"
+      >
+        <Flex justifyContent="space-between" px={4}>
+          <Flex alignItems="center">
+            <NextLink href="/" passHref>
+              <Link>
+                <Icon as={FaStroopwafel} w={[6, 8]} h={[6, 8]} />
+              </Link>
+            </NextLink>
 
-          <Text ml={2} fontWeight="bold" fontSize={["xs", "xl"]}>
-            Cookie Crumbs
-          </Text>
-        </Flex>
-        <Flex alignItems="center">
-          <NextLink href="/learn" passHref>
-            <Link>
-              <Text mr={[4, 8]} fontWeight="bold" fontSize={["xs", "xl"]}>
-                Learn More
-              </Text>
-            </Link>
-          </NextLink>
-          {user ? (
-            <NextLink href="/dashboard" passHref>
+            <Text ml={2} fontWeight="bold" fontSize={["xs", "xl"]}>
+              Cookie Crumbs
+            </Text>
+          </Flex>
+          <Flex alignItems="center">
+            <NextLink href="/learn" passHref>
               <Link>
-                <Button color="teal" size="sm">
-                  Dashboard
-                </Button>
+                <Text mr={[4, 8]} fontWeight="bold" fontSize={["xs", "xl"]}>
+                  Learn More
+                </Text>
               </Link>
             </NextLink>
-          ) : (
-            <NextLink href="/signin" passHref>
-              <Link>
-                <Button color="teal" size="sm">
-                  Sign In
-                </Button>
-              </Link>
-            </NextLink>
-          )}
+            {user ? (
+              <NextLink href="/dashboard" passHref>
+                <Link>
+                  <Button color="teal" size="sm">
+                    Dashboard
+                  </Button>
+                </Link>
+              </NextLink>
+            ) : (
+              <NextLink href="/signin" passHref>
+                <Link>
+                  <Button color="teal" size="sm">
+                    Sign In
+                  </Button>
+                </Link>
+              </NextLink>
+            )}
+          </Flex>
         </Flex>
-      </Flex>
-    </Box>
+      </Box>
+    </Flex>
   );
 }

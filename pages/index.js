@@ -4,44 +4,41 @@ import styles from "../styles/Home.module.css";
 import { useAuth } from "../lib/auth";
 import Signup from "../components/Signup";
 import SignIn from "../components/SignIn";
-
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { FaStroopwafel } from "react-icons/fa";
+import { Box, Heading, Text, Icon } from "@chakra-ui/react";
+import IndexNavBar from "@/components/IndexNavBar";
 
 export default function Home() {
-  const auth = useAuth();
-  const inputEmail = useRef(null);
-  const inputPassword = useRef(null);
-  const test = () => {
-    if (auth.user) {
-      console.log(auth.user.email);
-    } else {
-      console.log(":(");
-    }
-  };
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Box
-        textAlign="center"
-        background="teal.100"
-        mb={8}
-        p={8}
-        borderRadius="20px"
-      >
-        <Heading>Cookie Crumbs</Heading>
-        <Text fontSize="lg">
-          Your one stop shop for tracking and managing your cookie orders
-        </Text>
-      </Box>
-      <Box>
-        <Text textAlign="center" fontSize="xl" fontWeight="bold" mb={4}>
-          Sign Up Today!
-        </Text>
-        <Signup />
-      </Box>
-    </div>
+    <>
+      <IndexNavBar />
+      <div className={styles.container}>
+        <Head>
+          <title>Cookie Crumbs | Order Tracker</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <Box
+          textAlign="center"
+          background="teal"
+          mb={8}
+          p={8}
+          mt={16}
+          borderRadius="20px"
+          color="white"
+        >
+          <Icon as={FaStroopwafel} w={8} h={8} />
+          <Heading>Cookie Crumbs</Heading>
+          <Text fontSize="lg">
+            Your one stop shop for tracking and managing your cookie orders
+          </Text>
+        </Box>
+        <Box mb={8}>
+          <Text textAlign="center" fontSize="xl" fontWeight="bold" mb={4}>
+            Sign Up Today!
+          </Text>
+          <Signup />
+        </Box>
+      </div>
+    </>
   );
 }

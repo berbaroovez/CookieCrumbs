@@ -5,7 +5,7 @@ export default function Searchbar({ ...rest }) {
     <Input
       {...rest}
       type="text"
-      placeholder="search orders"
+      placeholder="Search Orders..."
       background="grey.100"
       maxW={"510px"}
       mb={4}

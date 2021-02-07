@@ -41,7 +41,9 @@ export default function PendingOrderTable({ orders }) {
       <tbody>
         {orders.map((order) => (
           <Box as="tr" key={order.id}>
-            <Td fontWeight="medium">{order.name}</Td>
+            <Td maxW={40} isTruncated fontWeight="medium">
+              {order.name}
+            </Td>
             <Td>{format(parseISO(order.eventDate), "P")}</Td>
             <Td>{order.theme}</Td>
             <Td>{order.quantity}</Td>

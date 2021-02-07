@@ -10,9 +10,13 @@ import {
 } from "@chakra-ui/icons";
 import NavLink from "./NavLink";
 import NavSignOut from "./NavSignOut";
+import { useRouter } from "next/router";
 
 export default function DashboardSkeleton({ children }) {
   const { user } = useAuth();
+
+  const router = useRouter();
+
   return (
     <Box backgroundColor="blackAlpha.100" p={10} pl={5}>
       <Flex //Side bar
@@ -27,9 +31,7 @@ export default function DashboardSkeleton({ children }) {
       >
         <NavLink pageRoute="dashboard">
           <StarIcon mr={2} />
-          <Text fontWeight="bold" fontSize="lg">
-            Home
-          </Text>
+          <Text fontSize="lg">Home</Text>
         </NavLink>
 
         {user ? (

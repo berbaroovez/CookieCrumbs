@@ -13,6 +13,7 @@ import {
   Textarea,
   Checkbox,
   Text,
+  Heading,
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import { submitOrder } from "@/lib/db";
@@ -78,10 +79,10 @@ export default function OrderFormPage({ bakeryInfo }) {
   };
 
   return (
-    <Box as="form" onSubmit={onSubmit} margin={8}>
-      <Text fontSize="2xl" casing="uppercase">
+    <Box as="form" onSubmit={onSubmit} padding={8}>
+      <Heading as="h1" size="2xl" isTruncated mb={4}>
         {bakeryInfo && bakeryInfo.companyName}
-      </Text>
+      </Heading>
       <FormControl>
         <FormLabel>Name</FormLabel>
         <Input mb={4} type="text" ref={inputName} placeholder="Nate Stanz" />

@@ -1,7 +1,13 @@
+import { useEffect } from "react";
 import NextLink from "next/link";
 import { Flex, Link } from "@chakra-ui/react";
-
+import { useRouter } from "next/router";
 export default function NavLink({ pageRoute, children, ...rest }) {
+  const router = useRouter();
+
+  console.log("router", router.pathname);
+  console.log("pathname", pageRoute);
+  console.log(router.pathname === `/${pageRoute}`);
   return (
     <NextLink href={`/${pageRoute}`} {...rest} passHref>
       <Link style={{ textDecoration: "none" }}>
@@ -14,6 +20,7 @@ export default function NavLink({ pageRoute, children, ...rest }) {
           _hover={{
             backgroundColor: "whiteAlpha.500",
           }}
+          fontWeight={router.pathname === `/${pageRoute}` ? "bold" : "normal"}
         >
           {children}
         </Flex>

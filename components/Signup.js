@@ -42,8 +42,14 @@ export default function Signup() {
           ref={inputCompanyName}
           placeholder="148 Cookie Street"
         />
-        <FormHelperText>Let us know your companys name!</FormHelperText>
-        <Button mt={4} type="submit" fontWeight="medium">
+        <FormHelperText>Let us know your bakerys name!</FormHelperText>
+        <Button
+          mt={4}
+          type="submit"
+          fontWeight="bold"
+          color="white"
+          background="teal"
+        >
           Sign Up
         </Button>
       </FormControl>

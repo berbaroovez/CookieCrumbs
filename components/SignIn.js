@@ -69,7 +69,7 @@ export default function SignIn() {
           cursor: "pointer",
         }}
       >
-        Forgot Password?
+        {resetPass ? "Sign In" : "Forgot your password?"}
       </Text>
     </Box>
   );

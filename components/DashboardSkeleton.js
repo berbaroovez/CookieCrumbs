@@ -12,6 +12,8 @@ import NavLink from "./NavLink";
 import NavSignOut from "./NavSignOut";
 import { useRouter } from "next/router";
 
+//Dashboard Skeleton
+//This is the base template for all my dashboard pages
 export default function DashboardSkeleton({ children }) {
   const { user } = useAuth();
 
@@ -28,6 +30,7 @@ export default function DashboardSkeleton({ children }) {
         p={2}
         height="60vh"
         pos="fixed"
+        color="white"
       >
         <NavLink pageRoute="dashboard">
           <StarIcon mr={2} />

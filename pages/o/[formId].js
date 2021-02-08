@@ -1,3 +1,5 @@
+//Template page for creating the shareable order form page
+
 import { useRouter } from "next/router";
 
 import DatePicker from "react-datepicker";
@@ -12,7 +14,6 @@ import {
   Select,
   Textarea,
   Checkbox,
-  Text,
   Heading,
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";

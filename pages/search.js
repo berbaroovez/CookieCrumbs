@@ -17,14 +17,12 @@ export default function Dashboard() {
 
   const handleChange = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
     setSearchbar(e.target.value);
   };
   if (!data) {
     return (
       <>
         <DashboardSkeleton>
-          <SiteTableSkeleton />
           <SiteTableSkeleton />
         </DashboardSkeleton>
       </>

@@ -3,7 +3,7 @@ import SiteTableSkeleton from "../components/SiteTableSkeleton";
 import { useAuth } from "@/lib/auth";
 import useSWR from "swr";
 import fetcher from "@/utils/fetcher";
-import PendingOrderTable from "@/components/PendingOrderTable";
+import OrderTable from "@/components/OrderTable";
 import Searchbar from "@/components/Searchbar";
 import { useState } from "react";
 import DashboardEmptyState from "@/components/DashboardEmptyState";
@@ -30,14 +30,14 @@ export default function Dashboard() {
       </>
     );
   }
-  if (data.orderList.length) {
+  if (data) {
     const filteredData = data.orderList.filter((order) =>
       order.name.toLowerCase().includes(searchbar.toLowerCase())
     );
     return (
       <DashboardSkeleton>
         <Searchbar onChange={handleChange} />
-        <PendingOrderTable orders={filteredData} />
+        <OrderTable orders={filteredData} />
       </DashboardSkeleton>
     );
   }

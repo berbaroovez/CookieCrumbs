@@ -26,7 +26,7 @@ const SkeletonRow = ({ width }) => (
   </Box>
 );
 
-export default function PendingOrderTable({ orders }) {
+export default function OrderTable({ orders }) {
   return (
     <Table mb={8}>
       <thead>

@@ -3,10 +3,10 @@ import SiteTableSkeleton from "../components/SiteTableSkeleton";
 import { useAuth } from "@/lib/auth";
 import useSWR from "swr";
 import fetcher from "@/utils/fetcher";
-import PendingOrderTable from "@/components/PendingOrderTable";
+import OrderTable from "@/components/OrderTable";
 import DashboardEmptyState from "@/components/DashboardEmptyState";
 
-import { Box, Heading, Text, Icon, Flex, Button, Link } from "@chakra-ui/react";
+import { Text, Flex } from "@chakra-ui/react";
 export default function Dashboard() {
   const { user } = useAuth();
   const { data } = useSWR(
@@ -35,7 +35,7 @@ export default function Dashboard() {
           <Text fontSize="2xl" fontWeight="medium" mb={4}>
             Pending Orders
           </Text>
-          <PendingOrderTable orders={data.orderList} />
+          <OrderTable orders={data.orderList} />
         </Flex>
       </DashboardSkeleton>
     );

@@ -33,6 +33,7 @@ export default function OrderReviewTemplate({ order }) {
       status,
     };
     toast({
+      position: "top",
       title: "Updated",
       description: "The order has been updated.",
       status: "info",

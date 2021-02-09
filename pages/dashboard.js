@@ -7,6 +7,7 @@ import OrderTable from "@/components/OrderTable";
 import DashboardEmptyState from "@/components/DashboardEmptyState";
 
 import { Text, Flex } from "@chakra-ui/react";
+import MonthlyStats from "@/components/MonthlyStats";
 export default function Dashboard() {
   const { user } = useAuth();
   const { data } = useSWR(
@@ -23,6 +24,7 @@ export default function Dashboard() {
               Pending Orders
             </Text>
             <SiteTableSkeleton />
+            <MonthlyStats />
           </Flex>
         </DashboardSkeleton>
       </>
@@ -31,11 +33,14 @@ export default function Dashboard() {
   if (data.orderList.length) {
     return (
       <DashboardSkeleton>
-        <Flex direction="column">
-          <Text fontSize="2xl" fontWeight="medium" mb={4}>
-            Pending Orders
-          </Text>
-          <OrderTable orders={data.orderList} />
+        <Flex flexDirection={{ base: "column", lg: "row" }}>
+          <Flex direction="column" marginEnd={4}>
+            <Text fontSize="2xl" fontWeight="medium" mb={4}>
+              Pending Orders
+            </Text>
+            <OrderTable orders={data.orderList} />
+          </Flex>
+          <MonthlyStats alignSelf={{ base: "flex-start", lg: "center" }} />
         </Flex>
       </DashboardSkeleton>
     );

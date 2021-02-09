@@ -70,10 +70,11 @@ export default function OrderFormPage({ bakeryInfo }) {
       contactMethod: inputContact.current.value,
       eventDate: startDate.toISOString(),
       theme: inputTheme.current.value,
-      quantity: inputQuantity.current.value,
+      quantity: parseInt(inputQuantity.current.value),
       notes: inputNotes.current.value,
       createdAt: new Date().toISOString(),
       status: "Pending",
+      cost: 0,
     };
 
     submitOrder(newOrder);

@@ -28,7 +28,7 @@ export default function DashboardSkeleton({ children }) {
         maxWidth={48}
         justifyContent="center"
         p={2}
-        height="60vh"
+        height="600px"
         pos="fixed"
         color="white"
       >

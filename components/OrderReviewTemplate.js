@@ -29,7 +29,7 @@ export default function OrderReviewTemplate({ order }) {
     e.preventDefault();
     const orderInfoUpdate = {
       pickupDate: pickupDate.toISOString(),
-      cost: cost || 0,
+      cost: parseFloat(cost),
       status,
     };
     toast({
@@ -85,7 +85,7 @@ export default function OrderReviewTemplate({ order }) {
           </Text>
           <Text fontSize="xl">{order.quantity}</Text>
         </Flex>
-        <Flex mb={4}>
+        <Flex mb={4} alignItems="baseline">
           <Text fontSize="xl" color="gray.500" mr={2}>
             Notes:
           </Text>

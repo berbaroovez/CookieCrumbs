@@ -1,13 +1,14 @@
 import React from "react";
-import { Link, Table, Thead, Tbody, Tr, Th, Td, Box } from "@chakra-ui/react";
-
+import { Link } from "@chakra-ui/react";
+import { Table, Tr, Th, Td } from "./Table";
 import { parseISO, format } from "date-fns";
 import NextLink from "next/link";
+import { ThemeContext } from "@emotion/react";
 
-export default function OrderTable({ orders, ...props }) {
+export default function TempTable({ orders, ...props }) {
   return (
-    <Table background="white" variant="unstyled" borderRadius="20px" {...props}>
-      <Thead>
+    <Table height={16}>
+      <thead>
         <Tr>
           <Th>Name</Th>
           <Th>Date</Th>
@@ -15,8 +16,8 @@ export default function OrderTable({ orders, ...props }) {
           <Th>Quantity</Th>
           <Th>{""}</Th>
         </Tr>
-      </Thead>
-      <Tbody>
+      </thead>
+      <tbody>
         {orders.map((order) => (
           <Tr>
             <Td
@@ -39,7 +40,12 @@ export default function OrderTable({ orders, ...props }) {
             </Td>
           </Tr>
         ))}
-      </Tbody>
+      </tbody>
+      {/* <Tfoot>
+        <Tr>
+          <Th>Pending Orders</Th>
+        </Tr>
+      </Tfoot> */}
     </Table>
   );
 }

@@ -78,6 +78,15 @@ export default function OrderFormPage({ bakeryInfo }) {
     };
 
     submitOrder(newOrder);
+
+    inputName.current.value = "";
+    inputEmail.current.value = "";
+    inputPhoneNumber.current.value = "";
+    inputContact.current.value = "";
+    setStartDate(new Date());
+    inputTheme.current.value = "";
+    inputQuantity.current.value = "";
+    inputNotes.current.value = "";
   };
 
   return (
@@ -85,22 +94,28 @@ export default function OrderFormPage({ bakeryInfo }) {
       <Heading as="h1" size="2xl" isTruncated mb={4}>
         {bakeryInfo && bakeryInfo.companyName}
       </Heading>
+      <FormLabel>Name</FormLabel>
       <FormControl>
-        <FormLabel>Name</FormLabel>
-        <Input mb={4} type="text" ref={inputName} placeholder="Nate Stanz" />
+        <Input
+          mb={4}
+          type="text"
+          ref={inputName}
+          placeholder="Nate Stanz"
+          isRequired
+        />
 
         <FormLabel>Email address</FormLabel>
-        <Input type="email" ref={inputEmail} />
+        <Input type="email" ref={inputEmail} isRequired />
         <FormHelperText mb={4}>We'll never share your email.</FormHelperText>
 
         <FormLabel>Phone Number</FormLabel>
-        <Input type="tel" ref={inputPhoneNumber} />
+        <Input type="tel" ref={inputPhoneNumber} isRequired />
         <FormHelperText mb={4}>
           We'll never share your phone number.
         </FormHelperText>
 
         <FormLabel>Preffered Contact</FormLabel>
-        <Select placeholder="Choose Contact" ref={inputContact}>
+        <Select placeholder="Choose Contact" ref={inputContact} isRequired>
           <option value="Phone">Phone Call</option>
           <option value="Text">Text</option>
           <option value="Email">Email</option>
@@ -117,7 +132,7 @@ export default function OrderFormPage({ bakeryInfo }) {
         </Box>
 
         <FormLabel>Order Theme</FormLabel>
-        <Select placeholder="Choose Theme" ref={inputTheme}>
+        <Select placeholder="Choose Theme" ref={inputTheme} isRequired>
           <option value="Birthday">Phone Call</option>
           <option value="Anniversary">Anniversary</option>
           <option value="Wedding">Wedding</option>
@@ -133,7 +148,7 @@ export default function OrderFormPage({ bakeryInfo }) {
         </FormHelperText>
 
         <FormLabel>How many cookies do you need?</FormLabel>
-        <Input type="number" ref={inputQuantity} />
+        <Input type="number" ref={inputQuantity} isRequired />
         <FormHelperText mb={4}>
           Please enter whole numbers. A dozen = 12
         </FormHelperText>
@@ -149,7 +164,7 @@ export default function OrderFormPage({ bakeryInfo }) {
         </FormHelperText>
 
         <FormLabel>Agreement</FormLabel>
-        <Checkbox>
+        <Checkbox isRequired>
           By submitting your order you understand that your order isnt confirmed
           until we reach out to you.
         </Checkbox>

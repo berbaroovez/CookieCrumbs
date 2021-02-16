@@ -23,7 +23,6 @@ export default function Home() {
           mb={8}
           p={8}
           mt={16}
-          borderRadius="20px"
           color="white"
         >
           <Icon as={FaStroopwafel} w={8} h={8} />

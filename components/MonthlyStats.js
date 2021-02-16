@@ -67,10 +67,10 @@ export default function MonthlyStats({ ...rest }) {
         {...rest}
       >
         <Flex>
-          <Stat>
+          <Stat position="relative">
             <StatLabel fontWeight="bold">Revenue</StatLabel>
             <StatNumber>${runningTotal}</StatNumber>
-            <StatHelpText>
+            <StatHelpText position="absolute" width={24}>
               {format(monthAgoDate, "LLL d")} - {format(todaysDate, "LLL d")}
             </StatHelpText>
           </Stat>

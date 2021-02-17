@@ -11,7 +11,11 @@ import MonthlyStats from "@/components/MonthlyStats";
 import InfoSquare from "@/components/InfoSquare";
 import InfoSquareSkeleton from "@/components/InfoSquareSkeleton";
 
-import { getSquaresInfo, getPendingOrders } from "@/utils/dashboardfunctions";
+import {
+  getSquaresInfo,
+  getPendingOrders,
+  getCookieCalender,
+} from "@/utils/dashboardfunctions";
 export default function Dashboard() {
   const { user } = useAuth();
   const { data } = useSWR(
@@ -44,6 +48,7 @@ export default function Dashboard() {
   }
   if (data.orderList.length) {
     const squareInfo = getSquaresInfo(data.orderList);
+    getCookieCalender(data.orderList, tomorrow);
     return (
       <DashboardSkeleton>
         <Stack spacing={4} direction="row">
@@ -61,7 +66,7 @@ export default function Dashboard() {
           </Flex>
         </Flex>
         <PickUpTable
-          orders={getPendingOrders(data.orderList)}
+          orders={getCookieCalender(data.orderList, tomorrow)}
           startDate={tomorrow}
         />
       </DashboardSkeleton>

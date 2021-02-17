@@ -1,4 +1,4 @@
-import { parseISO, subMonths } from "date-fns";
+import { parseISO, subMonths, addDays, compareAsc } from "date-fns";
 import { Order } from "@/utils/interfaces";
 interface SquareInfo {
   profit: number;
@@ -50,7 +50,6 @@ export function getOrderCount(orders: Array<Order>): number {
 }
 
 export function getTheme(orders: Array<Order>): string {
-  console.log(orders[0]);
   let themeTracker = {};
   const todaysDate: Date = new Date();
   const monthAgoDate: Date = subMonths(new Date(), 1);
@@ -84,4 +83,48 @@ export function getPendingOrders(orders: Array<Order>): Array<Order> {
   });
 
   return orderList;
+}
+
+export function getCookieCalender(
+  orders: Array<Order>,
+  startDate
+): Array<Order> {
+  const firstDate: Date = startDate;
+  const secondDate: Date = addDays(firstDate, 5);
+
+  let tempCalender: Array<Date> = [];
+
+  for (let i = 0; i <= 5; i++) {
+    let currentDate: Date = new Date();
+    currentDate.setDate(startDate.getDate() + i);
+    tempCalender.push(currentDate);
+  }
+
+  let pickups: Array<Order> = [];
+
+  orders.forEach((order) => {
+    if (
+      firstDate <= parseISO(order.pickupDate) &&
+      secondDate >= parseISO(order.pickupDate)
+    ) {
+      pickups.push(order);
+    }
+  });
+
+  pickups.sort((a, b) =>
+    compareAsc(parseISO(a.pickupDate), parseISO(b.pickupDate))
+  );
+  //-------------------------------------------
+  // console.log("TEMP CALENDER");
+
+  // tempCalender.forEach((day) => {
+  //   console.log("Temp Day", day.getDate());
+  // });
+  // //------------------------------------
+  // console.log("OrderList");
+
+  // pickups.forEach((order) => {
+  //   console.log(order.name, "Temp Day", parseISO(order.pickupDate).getTime());
+  // });
+  return pickups;
 }

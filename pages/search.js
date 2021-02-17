@@ -7,6 +7,7 @@ import OrderTable from "@/components/OrderTable";
 import Searchbar from "@/components/Searchbar";
 import { useState } from "react";
 import DashboardEmptyState from "@/components/DashboardEmptyState";
+import TempTable from "../components/TempTable";
 export default function Dashboard() {
   const [searchbar, setSearchbar] = useState("");
   const { user } = useAuth();
@@ -35,7 +36,8 @@ export default function Dashboard() {
     return (
       <DashboardSkeleton>
         <Searchbar onChange={handleChange} />
-        <OrderTable orders={filteredData} />
+        {/* <OrderTable orders={filteredData} /> */}
+        <TempTable orders={filteredData} />
       </DashboardSkeleton>
     );
   }

@@ -67,7 +67,7 @@ export default function DashboardSkeleton({ children }) {
       </Flex>
       {/* 
         Might have to change this to have a maxWidth Variable later */}
-      <Flex ml={48} flexDirection="column">
+      <Flex ml={48} flexDirection="column" display="inline-flex">
         {children}
       </Flex>
     </Box>

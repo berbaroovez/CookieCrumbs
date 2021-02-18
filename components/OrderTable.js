@@ -18,7 +18,7 @@ export default function OrderTable({ orders, ...props }) {
       </Thead>
       <Tbody>
         {orders.map((order) => (
-          <Tr>
+          <Tr key={order.createdAt}>
             <Td
               maxW={40}
               isTruncated

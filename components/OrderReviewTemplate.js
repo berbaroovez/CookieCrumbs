@@ -113,10 +113,13 @@ export default function OrderReviewTemplate({ order }) {
             Pick Up Date:
           </Text>
           <DatePicker
-            size="sm"
-            minDate={new Date()}
             selected={pickupDate}
             onChange={(date) => setPickupDate(date)}
+            showTimeSelect
+            timeIntervals={15}
+            timeCaption="Time"
+            timeFormat="hh:mm aa"
+            dateFormat="MMMM d, yyyy hh:mm aa"
           />
         </Flex>
         <Flex alignItems="center">

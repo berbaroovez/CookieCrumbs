@@ -51,21 +51,31 @@ export default function Dashboard() {
     getCookieCalender(data.orderList, tomorrow);
     return (
       <DashboardSkeleton>
-        <Stack spacing={4} direction="row">
+        <Flex justifyContent="space-evenly" width="600px">
+          {/* <Stack spacing={4} direction="row" width="600px" background="red"> */}
           <InfoSquare title="Monthly Revenue">${squareInfo.profit}</InfoSquare>
           <InfoSquare title="Monthly Orders">{squareInfo.orders}</InfoSquare>
           <InfoSquare title="#1 Theme">{squareInfo.theme}</InfoSquare>
-        </Stack>
+          {/* </Stack> */}
+        </Flex>
         <Flex flexDirection={{ base: "column", lg: "row" }}>
           <Flex direction="column" marginEnd={4}>
             <Text fontSize="2xl" fontWeight="medium" mb={4}>
               Pending Orders
             </Text>
 
-            <OrderTable orders={getPendingOrders(data.orderList)} mb={4} />
+            <OrderTable
+              orders={getPendingOrders(data.orderList)}
+              mb={4}
+              width="600px"
+            />
           </Flex>
         </Flex>
+        <Text fontSize="2xl" fontWeight="medium" mb={4}>
+          Pickups
+        </Text>
         <PickUpTable
+          width="600px"
           orders={getCookieCalender(data.orderList, tomorrow)}
           startDate={tomorrow}
         />

@@ -154,14 +154,14 @@ export default function OrderFormPage({ bakeryInfo }) {
         </FormHelperText>
 
         <FormLabel>Notes</FormLabel>
+        <FormHelperText mb={4}>
+          Have any extra questions or details let us know!
+        </FormHelperText>
         <Textarea
           placeholder="Ex: The birthday will be Fortnite themed"
           size="sm"
           ref={inputNotes}
         />
-        <FormHelperText mb={4}>
-          Have any extra questions or details let us know!
-        </FormHelperText>
 
         <FormLabel>Agreement</FormLabel>
         <Checkbox isRequired>
@@ -170,7 +170,7 @@ export default function OrderFormPage({ bakeryInfo }) {
         </Checkbox>
 
         <Button mt={16} type="submit" colorScheme="teal" fontWeight="medium">
-          Order
+          Submit
         </Button>
       </FormControl>
     </Box>

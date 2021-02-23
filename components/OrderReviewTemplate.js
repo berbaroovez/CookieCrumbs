@@ -7,7 +7,10 @@ import {
   NumberInputField,
   Select,
   useToast,
+  Image,
+  Grid,
 } from "@chakra-ui/react";
+
 import DatePicker from "react-datepicker";
 import { PhoneIcon, ChatIcon, EmailIcon } from "@chakra-ui/icons";
 import { parseISO, format } from "date-fns";
@@ -122,7 +125,7 @@ export default function OrderReviewTemplate({ order }) {
             dateFormat="MMMM d, yyyy hh:mm aa"
           />
         </Flex>
-        <Flex alignItems="center">
+        <Flex alignItems="center" mb={2}>
           <Text fontSize="xl" color="gray.500" mr={2}>
             Status:
           </Text>
@@ -138,6 +141,27 @@ export default function OrderReviewTemplate({ order }) {
             <option value="Completed">Completed</option>
           </Select>
         </Flex>
+        <Grid templateColumns="repeat(4, 1fr)">
+          {order.images
+            ? order.images.map((picture) => (
+                <Box
+                  key={picture}
+                  background="gray.300"
+                  padding={1}
+                  mr={2}
+                  mb={2}
+                  borderRadius="4px"
+                >
+                  <Image
+                    boxSize="100px"
+                    objectFit="cover"
+                    src={picture}
+                    alt="Segun Adebayo"
+                  />
+                </Box>
+              ))
+            : null}
+        </Grid>
       </Box>
       <Button w={32} colorScheme="green" onClick={onUpdate}>
         Update

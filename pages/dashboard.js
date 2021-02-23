@@ -10,7 +10,7 @@ import { Text, Flex, Box, Stack } from "@chakra-ui/react";
 import MonthlyStats from "@/components/MonthlyStats";
 import InfoSquare from "@/components/InfoSquare";
 import InfoSquareSkeleton from "@/components/InfoSquareSkeleton";
-
+import fileUpload from "@/components/fileUpload";
 import {
   getSquaresInfo,
   getPendingOrders,
@@ -79,6 +79,7 @@ export default function Dashboard() {
           orders={getCookieCalender(data.orderList, tomorrow)}
           startDate={tomorrow}
         />
+        <fileUpload />
       </DashboardSkeleton>
     );
   }

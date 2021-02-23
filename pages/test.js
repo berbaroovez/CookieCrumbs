@@ -1,57 +1,78 @@
-import DashboardSkeleton from "../components/DashboardSkeleton";
-import SiteTableSkeleton from "../components/SiteTableSkeleton";
-import { useAuth } from "@/lib/auth";
-import useSWR from "swr";
-import fetcher from "@/utils/fetcher";
-import OrderTable from "@/components/OrderTable";
-import DashboardEmptyState from "@/components/DashboardEmptyState";
+import React, { useState, useEffect } from "react";
+import firebase, { storage } from "@/lib/firebase";
+import { submitOrder } from "@/lib/db";
 
-import { Text, Flex, Box } from "@chakra-ui/react";
-import MonthlyStats from "@/components/MonthlyStats";
-export default function Test() {
-  const { user } = useAuth();
-  const { data } = useSWR(
-    user ? ["/api/orders/pendingOrders", user.token] : null,
-    fetcher
-  );
+export default function fileUpload() {
+  const [files, setFiles] = useState([]);
+  const [fileUrl, setFileUrl] = useState(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const onFileChange = (e) => {
+    for (let i = 0; i < e.target.files.length; i++) {
+      const newFile = e.target.files[i];
+      newFile["id"] = Math.random();
+      // add an "id" property to each File object
+      setFiles((prevState) => [...prevState, newFile]);
+    }
+  };
 
-  if (!data) {
-    return (
-      <>
-        <DashboardSkeleton>
-          <Flex direction="column">
-            <Text fontSize="2xl" fontWeight="medium" mb={4}>
-              Pending Orders
-            </Text>
-            <SiteTableSkeleton />
-            <MonthlyStats />
-          </Flex>
-        </DashboardSkeleton>
-      </>
-    );
-  }
-  if (data.orderList.length) {
-    return (
-      <DashboardSkeleton>
-        <OrderTable orders={data.orderList} />
-      </DashboardSkeleton>
-    );
+  // function onFileChange(e) {
+  //   const file = e.target.files[0];
+
+  //   for (var i = 0; i < e.target.files.length; i++) {
+  //     console.log(e.target.files[i].name);
+  //     setFiles((prevState) => [...prevState, e.target.files[i]]);
+  //   }
+
+  //   //   const storageRef = firebase
+  //   //     .app()
+  //   //     .storage("gs://cookiecrumbsbeta.appspot.com")
+  //   //     .ref();
+  //   //   const fileRef = storageRef.child(file.name);
+  //   //   await fileRef.put(file);
+  //   //   setFileUrl(await fileRef.getDownloadURL());
+  // }
+
+  const uploadFile = async () => {
+    let promises = [];
+
+    files.forEach((file) => {
+      let storageRef = firebase
+        .app()
+        .storage("gs://cookiecrumbsbeta.appspot.com")
+        .ref(`order/12321312313/${file.name}`);
+      promises.push(
+        storageRef.put(file).then((snapshot) => {
+          return snapshot.ref.getDownloadURL();
+        })
+      );
+    });
+
+    return Promise.all(promises);
+    // const fileRef = storageRef.child([files]);
+    // await fileRef.put(files);
+    // setFileUrl(await fileRef.getDownloadURL());
+  };
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    console.log(files);
+    var yolo = await uploadFile();
+    console.log(yolo);
+    // submitOrder({ fileUrl });
   }
 
   return (
-    <Box
-      bgGradient="linear(to-l, #7928CA,#FF0080)"
-      padding="2px"
-      borderRadius="20px"
-      mb={8}
-      display="inline-block"
-    >
-      <Box
-        width="500px"
-        background="blue.200"
-        height={32}
-        borderRadius="20px"
-      ></Box>
-    </Box>
+    <>
+      {/* <form onSubmit={onSubmit}>
+        <input
+          className="fileBtn"
+          type="file"
+          onChange={onFileChange}
+          multiple
+        />
+        <Input type="text" placeholder="yolo" mt={8} />
+        <button>Upload</button>
+      </form> */}
+    </>
   );
 }

@@ -1,7 +1,7 @@
 //Template page for creating the shareable order form page
 
 import { useRouter } from "next/router";
-
+import firebase from "@/lib/firebase";
 import DatePicker from "react-datepicker";
 
 import {
@@ -15,6 +15,7 @@ import {
   Textarea,
   Checkbox,
   Heading,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import { submitOrder } from "@/lib/db";
@@ -49,7 +50,7 @@ export async function getStaticPaths() {
 
 export default function OrderFormPage({ bakeryInfo }) {
   const router = useRouter();
-
+  const toast = useToast();
   const inputName = useRef(null);
   const inputEmail = useRef(null);
   const inputPhoneNumber = useRef(null);
@@ -58,10 +59,41 @@ export default function OrderFormPage({ bakeryInfo }) {
   const inputTheme = useRef(null);
   const inputQuantity = useRef(null);
   const inputNotes = useRef(null);
+  const [files, setFiles] = useState([]);
 
-  const onSubmit = (e) => {
+  const onFileChange = (e) => {
+    setFiles([]);
+    for (let i = 0; i < e.target.files.length; i++) {
+      const newFile = e.target.files[i];
+      newFile["id"] = Math.floor(Math.random() * (999999999 - 1 + 1)) + 1;
+      // add an "id" property to each File object
+      setFiles((prevState) => [...prevState, newFile]);
+    }
+  };
+
+  const uploadFiles = async () => {
+    let promises = [];
+
+    files.forEach((file) => {
+      let storageRef = firebase
+        .app()
+        .storage("gs://cookiecrumbsbeta.appspot.com")
+        .ref(`order/${router.query.formId}/${file.id + file.name}`);
+      promises.push(
+        storageRef.put(file).then((snapshot) => {
+          return snapshot.ref.getDownloadURL();
+        })
+      );
+    });
+
+    return Promise.all(promises);
+  };
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(files);
+    var images = await uploadFiles();
+    console.log(images);
     const newOrder = {
       bakerId: router.query.formId,
       name: inputName.current.value,
@@ -75,9 +107,18 @@ export default function OrderFormPage({ bakeryInfo }) {
       createdAt: new Date().toISOString(),
       status: "Pending",
       cost: 0,
+      images,
     };
 
     submitOrder(newOrder);
+    toast({
+      position: "top",
+      title: "Order Submitted",
+      description: "Your order has been submitted.",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
 
     inputName.current.value = "";
     inputEmail.current.value = "";
@@ -154,16 +195,23 @@ export default function OrderFormPage({ bakeryInfo }) {
         </FormHelperText>
 
         <FormLabel>Notes</FormLabel>
-        <FormHelperText mb={4}>
+        <FormHelperText>
           Have any extra questions or details let us know!
         </FormHelperText>
         <Textarea
           placeholder="Ex: The birthday will be Fortnite themed"
           size="sm"
           ref={inputNotes}
+          mb={4}
         />
-
-        <FormLabel>Agreement</FormLabel>
+        <FormLabel mb={-2}>Reference Photos</FormLabel>
+        <input
+          className="fileBtn"
+          type="file"
+          onChange={onFileChange}
+          multiple
+        />
+        <FormLabel mt={4}>Agreement</FormLabel>
         <Checkbox isRequired>
           By submitting your order you understand that your order isnt confirmed
           until we reach out to you.
